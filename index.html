@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Double Integration Virtual Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <header class="app-header">
+    <a class="brand" href="#home" data-tab-link="home">
+      <span class="brand-mark">II</span>
+      <span>Double Integration Virtual Lab</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Open tabs" aria-expanded="false">Menu</button>
+    <nav class="tab-nav" id="tabNav" aria-label="Virtual lab tabs">
+      <a class="tab-link active" href="#home" data-tab="home">Home</a>
+      <a class="tab-link" href="#theory" data-tab="theory">Theory</a>
+      <a class="tab-link" href="#practice" data-tab="practice">Practice</a>
+      <a class="tab-link" href="#solver" data-tab="solver">Solver</a>
+      <a class="tab-link" href="#test" data-tab="test">Test</a>
+      <a class="tab-link developer-only hidden" href="#monitor" data-tab="monitor">Analytics</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="tab-page active">
+      <div class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Multivariate Calculus</p>
+          <h1>Double Integration</h1>
+          <p class="hero-text">A double integral adds infinitely many small values over a two-dimensional region. It is
+            used to calculate area, volume under a surface, mass of a lamina, average value, and bounded-region
+            problems.</p>
+          <div class="quick-actions">
+            <button class="button primary" data-tab="theory" type="button">Read Theory</button>
+            <button class="button ghost" data-tab="practice" type="button">Start Practice</button>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <canvas id="surfaceCanvas" width="760" height="650" aria-label="Animated double integration surface"></canvas>
+        </div>
+      </div>
+
+      <section class="info-band">
+        <article>
+          <h2>What You Will Learn</h2>
+          <p>Set up and evaluate double integrals on rectangular regions, solve area bounded by curves, understand
+            limits with infinity, and practice with guided questions and tests.</p>
+        </article>
+        <article>
+          <h2>Main Formula</h2>
+          <p class="formula">&int;&int;<sub>R</sub> f(x,y) dA</p>
+          <p>When <code>f(x,y) = 1</code>, the double integral gives the area of region <code>R</code>.</p>
+        </article>
+      </section>
+
+      <section class="flow-section">
+        <div class="section-title">
+          <p class="eyebrow">Learning Flow</p>
+          <h2>How to Solve a Double Integration Question</h2>
+        </div>
+        <div class="flowchart">
+          <div>Read the question</div>
+          <span>-></span>
+          <div>Identify the region R</div>
+          <span>-></span>
+          <div>Choose dx dy or dy dx</div>
+          <span>-></span>
+          <div>Write limits</div>
+          <span>-></span>
+          <div>Integrate inner first</div>
+          <span>-></span>
+          <div>Get final answer</div>
+        </div>
+      </section>
+    </section>
+
+    <section id="theory" class="tab-page">
+      <div class="page-shell">
+        <div class="section-title">
+          <p class="eyebrow">Theory Tab</p>
+          <h2>Double Integration Theory</h2>
+        </div>
+
+        <div class="theory-grid">
+          <article class="panel">
+            <h3>1. Meaning</h3>
+            <p>The double integral of <code>f(x,y)</code> over region <code>R</code> is the accumulated value of the
+              function over that complete region.</p>
+            <p class="formula">&int;&int;<sub>R</sub> f(x,y) dA</p>
+          </article>
+          <article class="panel">
+            <h3>2. Area Bounded by Curves</h3>
+            <p>If the question asks for area bounded by curves, use <code>f(x,y)=1</code>. For curves
+              <code>y=g1(x)</code> and <code>y=g2(x)</code>:
+            </p>
+            <p class="formula">Area = &int;<sub>a</sub><sup>b</sup> &int;<sub>g1(x)</sub><sup>g2(x)</sup> 1 dy dx</p>
+          </article>
+          <article class="panel">
+            <h3>3. With Limits</h3>
+            <p>If limits are given, directly place them in the integral and solve inside to outside.</p>
+            <p>Example: <code>0 <= x <= 2</code>, <code>x <= y <= 4</code>.</p>
+          </article>
+          <article class="panel">
+            <h3>4. Without Limits</h3>
+            <p>If limits are not given, enter only the boundary graphs. The solver finds their intersection points,
+              builds the limits, and evaluates the double integral over that region.</p>
+            <p class="formula">&int;<sub>a</sub><sup>b</sup> &int;<sub>lower graph</sub><sup>upper graph</sup> f(x,y) dy
+              dx</p>
+          </article>
+          <article class="panel">
+            <h3>5. Infinity Limits</h3>
+            <p>Type <code>inf</code>, <code>infinity</code>, <code>+inf</code>, or <code>-inf</code> in a limit box. The
+              numeric solver approximates infinity using a large cutoff and clearly marks it as an improper integral
+              approximation.</p>
+          </article>
+          <article class="panel">
+            <h3>6. Choosing Order</h3>
+            <p>Use <code>dy dx</code> when vertical strips are simple. Use <code>dx dy</code> when horizontal strips are
+              simple.</p>
+          </article>
+        </div>
+
+        <div class="flow-section compact">
+          <div class="section-title">
+            <p class="eyebrow">Area-Bounded Flowchart</p>
+            <h2>When Graph Is Required</h2>
+          </div>
+          <div class="flowchart vertical">
+            <div>Given curves</div>
+            <span>v</span>
+            <div>Plot or identify intersections</div>
+            <span>v</span>
+            <div>Select top-bottom or right-left form</div>
+            <span>v</span>
+            <div>Write area integral with f(x,y)=1</div>
+            <span>v</span>
+            <div>Evaluate area</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="solver" class="tab-page">
+      <div class="page-shell">
+        <div class="section-title">
+          <p class="eyebrow">Solver Tab</p>
+          <h2>Question Solver With Graph</h2>
+        </div>
+
+        <div class="login-strip">
+          <div>
+            <p class="mini-label">Student Session</p>
+            <strong id="currentUserLabel">Guest learner</strong>
+          </div>
+          <form id="studentForm" class="student-form">
+            <label>Name <input id="studentName" type="text" maxlength="40" placeholder="First and Last Name" required
+                pattern="\S+\s+\S+.*" title="Please enter both your first name and surname."></label>
+            <label>Roll / ID <input id="studentId" type="text" maxlength="30" placeholder="Optional"></label>
+            <button class="button primary" type="submit">Login</button>
+          </form>
+          <button id="logoutBtn" class="button ghost hidden" type="button">Logout</button>
+        </div>
+
+        <div id="solverLockedMessage" class="panel locked-message">
+          <h3>Login Required</h3>
+          <p class="hint">Enter your name and roll number above to unlock the solver.</p>
+        </div>
+
+        <div id="solverWorkspace" class="solver-layout simple-solver hidden">
+          <form id="solverForm" class="panel tool-panel">
+            <label>
+              Select Question Type
+              <select id="solverMode">
+                <option value="rect">With x and y limits</option>
+                <option value="bounded-given">Graphs with given x limits</option>
+                <option value="bounded-auto">Graphs without limits</option>
+              </select>
+            </label>
+
+            <div id="rectInputs" class="input-group">
+              <label>Function f(x,y) <input id="functionInput" type="text" value="x*y + y^2" autocomplete="off"></label>
+              <div class="bounds-grid">
+                <label>x lower <input id="xLower" type="text" value="0"></label>
+                <label>x upper <input id="xUpper" type="text" value="2"></label>
+                <label>y lower <input id="yLower" type="text" value="0"></label>
+                <label>y upper <input id="yUpper" type="text" value="3"></label>
+              </div>
+              <label>
+                Integration order
+                <select id="orderInput">
+                  <option value="dxdy">dx dy</option>
+                  <option value="dydx">dy dx</option>
+                </select>
+              </label>
+            </div>
+
+            <div id="boundedInputs" class="input-group hidden">
+              <label>Integrand f(x,y) <input id="boundedFunctionInput" type="text" value="1" autocomplete="off"></label>
+              <label>Boundary graph 1: y = <input id="upperCurve" type="text" value="4 - x^2"></label>
+              <label>Boundary graph 2: y = <input id="lowerCurve" type="text" value="x + 2"></label>
+              <div class="bounds-grid" id="boundedLimitFields">
+                <label>x lower <input id="boundedXLower" type="text" value="-2"></label>
+                <label>x upper <input id="boundedXUpper" type="text" value="1"></label>
+              </div>
+              <p id="autoLimitNote" class="hint hidden">No x limits needed. The solver will find intersection points of
+                both graphs and use them as limits.</p>
+            </div>
+
+            <button class="button primary" type="submit">Solve</button>
+            <p class="hint">Use <code>inf</code>, <code>infinity</code>, <code>+inf</code>, or <code>-inf</code> for
+              improper limits. Functions support x, y, +, -, *, /, ^, sin, cos, tan, sqrt, log, exp, abs, pi, e.</p>
+          </form>
+
+          <div class="panel result-panel">
+            <h3>Solution</h3>
+            <div id="solverResult" class="solution-output">Choose a question type and press Solve.</div>
+            <div id="graphPanel" class="hidden">
+              <h3>Graph</h3>
+              <canvas id="graphCanvas" width="720" height="420" aria-label="Area bounded graph"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="practice" class="tab-page">
+      <div class="page-shell">
+        <div class="section-title">
+          <p class="eyebrow">Practice Tab</p>
+          <h2>Practice Questions</h2>
+        </div>
+        <div class="practice-filter">
+          <button class="chip active" data-practice-filter="all" type="button">All</button>
+          <button class="chip" data-practice-filter="limits" type="button">With Limits</button>
+          <button class="chip" data-practice-filter="bounded" type="button">Area Bounded</button>
+          <button class="chip" data-practice-filter="infinity" type="button">Infinity</button>
+        </div>
+        <div id="practiceList" class="question-list"></div>
+      </div>
+    </section>
+
+    <section id="test" class="tab-page">
+      <div class="page-shell">
+        <div class="section-title">
+          <p class="eyebrow">Test Tab</p>
+          <h2>Short Practice Tests</h2>
+        </div>
+        <div class="test-tabs" role="tablist" aria-label="Tests">
+          <button class="test-tab active" data-test="0" type="button">Test 1</button>
+          <button class="test-tab" data-test="1" type="button">Test 2</button>
+          <button class="test-tab" data-test="2" type="button">Test 3</button>
+        </div>
+        <form id="testForm" class="panel test-panel"></form>
+      </div>
+    </section>
+
+    <section id="monitor" class="tab-page">
+      <div class="page-shell">
+        <div class="section-title">
+          <p class="eyebrow">Analytics Tab</p>
+          <h2>Developer Analytics Monitor</h2>
+        </div>
+
+        <form id="developerLoginForm" class="panel developer-login">
+          <h3>Developer Access Required</h3>
+          <p class="hint">Student login and activity data is hidden from normal users. Enter the developer passcode to
+            view the dashboard.</p>
+          <label>Passcode <input id="developerPasscode" type="password" autocomplete="current-password"
+              placeholder="Enter developer passcode"></label>
+          <button class="button primary" type="submit">Unlock Monitor</button>
+          <div id="developerLoginFeedback" class="feedback"></div>
+        </form>
+
+        <div id="monitorDashboard" class="hidden">
+          <div class="monitor-actions">
+            <button id="refreshMonitor" class="button primary" type="button">Refresh</button>
+            <button id="exportCsv" class="button ghost" type="button">Export CSV</button>
+            <button id="lockMonitor" class="button ghost" type="button">Lock Monitor</button>
+            <button id="clearLogs" class="button danger" type="button">Clear Logs</button>
+          </div>
+          <div class="monitor-grid">
+            <div class="metric"><span id="activeCount">0</span>
+              <p>Active now</p>
+            </div>
+            <div class="metric"><span id="studentCount">0</span>
+              <p>Students used</p>
+            </div>
+            <div class="metric"><span id="eventCount">0</span>
+              <p>Total events</p>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>ID</th>
+                  <th>Status</th>
+                  <th>Last Activity</th>
+                  <th>Solver Uses</th>
+                  <th>Practice Uses</th>
+                  <th>Tests Taken</th>
+                </tr>
+              </thead>
+              <tbody id="monitorRows"></tbody>
+            </table>
+          </div>
+          <p class="hint">This is a Google Analytics style local dashboard for the lab. It tracks activity in the
+            current browser. For live monitoring across all students, connect these events to Google Analytics,
+            Firebase, Supabase, or your college server.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Double Integration Learning Platform. All rights reserved.</p>
+    <a class="developer-access" href="#monitor" data-tab="monitor">Developer Access</a>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
